@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_snippet_id: 
+  relevance: 1.5
+  keyword: MyString
+
+two:
+  user_snippet_id: 
+  relevance: 1.5
+  keyword: MyString

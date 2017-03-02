@@ -1,0 +1,30 @@
+<% if @keywords.present? %>
+	<div class="keywords">
+		<div class="panel panel-default">
+		  <!-- Default panel contents -->
+		  <div class="panel-heading text-center" style="font-size:20px">Here's WhatsNew!!</div>
+			<table class="table-striped table-hover table-condensed">
+				<tbody>
+					<% @keywords.each do |keyword| %>
+						<tr>
+							<td><span style="width: 39px;"><img src="/images/<%=keyword.provider%>.png"/></span></td>
+							<td><%= truncate(strip_tags(CGI.unescapeHTML(keyword.content)), length: 250) %></td>
+							<td><a style="font-size: medium;" target="_blank" href="<%=keyword.uri%>"><img src="/images/arrow.png"/></a></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="visuals">
+		<svg id="bubbleChart" style="width: 1000px; height: 500px;"/>
+		<span>
+			<script type="text/javascript">
+				paintBubbleChart(<%=@visuals.to_json.html_safe%>);
+			</script>
+		</span>
+	</div>
+<% else %>
+	<img style="padding-left:500px;" src="/images/processing.gif"/>
+	<span>Processing...</span>
+<% end %>

@@ -1,0 +1,24 @@
+<div id="connections">
+	<table class="table">
+	    <tbody>
+	      <%AuthenticationProvider.all.order('enabled DESC').each do |provider|%>
+	      <tr>
+	        <td style="width: 39px;"><img src="/images/<%=provider.name%>.png"/></td>
+	        <td><h4><%=provider.description%></h4></td>
+	        <td>
+	          <% if current_user.authentications.for_provider(provider.name).count != 0%>
+	            <%= link_to "Reconnect", user_omniauth_authorize_path(provider.name.to_sym), class: "btn btn-primary"%>
+	            <%= link_to "Disconnect", user_omniauth_authorize_path(provider.name.to_sym), class: "btn btn-danger"%>
+	          <%else%>
+							<% if provider.enabled%>
+	            	<%= link_to "Connect", user_omniauth_authorize_path(provider.name.to_sym), class: "btn btn-primary"%>
+							<% else %>
+								<img src="/images/coming_soon.png"/>
+							<% end %>
+	          <%end%>
+	        </td>
+	      </tr>
+	    <%end%>
+	  </tbody>
+	</table>
+</div>

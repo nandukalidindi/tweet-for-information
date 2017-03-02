@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_keyword_id: 
+  provider: MyString
+  uri: MyString
+  content: MyString
+
+two:
+  user_keyword_id: 
+  provider: MyString
+  uri: MyString
+  content: MyString

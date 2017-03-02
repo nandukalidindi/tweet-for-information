@@ -1,0 +1,14 @@
+<% if @keywords.present? %>
+	<div class="all_visuals">
+		<div><%= "#{@keywords.length} Total Bubbles" %></div>
+		<svg id="bubbleChart" style="width: 2000px; height: 2000px;"/>
+		<span>
+			<script type="text/javascript">
+				paintAllBubbleChart(<%=@visuals.to_json.html_safe%>);
+			</script>
+		</span>
+	</div>
+<% else %>
+	<img style="padding-left:500px;" src="/images/processing.gif"/>
+	<span>Processing...</span>
+<% end %>
