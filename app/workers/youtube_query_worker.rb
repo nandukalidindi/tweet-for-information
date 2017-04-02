@@ -5,7 +5,6 @@ class YoutubeQueryWorker
   sidekiq_options retry: false, :queue => :query
 
   def perform(keyword_id)
-    binding.pry
     user_keyword = UserKeyword.find(keyword_id)
 
     if user_keyword.present?

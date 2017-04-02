@@ -8,7 +8,7 @@
 					<% @keywords.each do |keyword| %>
 						<tr>
 							<td><span style="width: 39px;"><img src="/images/<%=keyword.provider%>.png"/></span></td>
-							<td><%= truncate(strip_tags(CGI.unescapeHTML(keyword.content)), length: 250) %></td>
+							<td><%= truncate(strip_tags(CGI.unescapeHTML(keyword.content || "")), length: 250) %></td>
 							<td><a style="font-size: medium;" target="_blank" href="<%=keyword.uri%>"><img src="/images/arrow.png"/></a></td>
 						</tr>
 					<% end %>
