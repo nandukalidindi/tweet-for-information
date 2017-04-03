@@ -11,11 +11,11 @@ class TwitterQueryWorker
     if user_keyword.present?
       begin
         # Instantiate the Choreo, using a previously instantiated TembooSession object, eg:
-        session = ::TembooSession.new("whatsnew", "myFirstApp", "JlEzrDsA5xf47NmfwK1TWiH98c9gCD1V")
+        session = ::TembooSession.new("whatsnew", "myFirstApp", "0P1XaicKwodZmuq2VbFaWNL5Jgy6m068")
         tweetsChoreo = Twitter::Search::Tweets.new(session)
         tweetsInputs = tweetsChoreo.new_input_set()
         tweetsInputs.set_AccessToken("836117688741150720-mrNEVa2MjAhtxxW1mmEmoY2fQ4tVYRV");
-        tweetsInputs.set_AccessTokenSecret("Cm58qJiV1TvyCZoGVDnnEU0MO49NehBBn81B7krf41AzW");    
+        tweetsInputs.set_AccessTokenSecret("Cm58qJiV1TvyCZoGVDnnEU0MO49NehBBn81B7krf41AzW");
         tweetsInputs.set_ConsumerKey("BgB9gfhMrjtSb3ZAy4Zen6u1b");
         tweetsInputs.set_ConsumerSecret("4vMkasCv3xhs0mRkfEjVePrCQfqoBpxCpgXcGWGTEcE9xywqNR");
 
