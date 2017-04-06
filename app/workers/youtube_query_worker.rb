@@ -1,4 +1,4 @@
-require 'google/api_client'
+# require 'google/api_client'
 
 class YoutubeQueryWorker
   include Sidekiq::Worker
