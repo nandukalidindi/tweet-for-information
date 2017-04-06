@@ -16,7 +16,7 @@ class AlchemyWorker
             TwitterQueryWorker.perform_async(keyword.id)
             GoogleNewsQueryWorker.perform_async(keyword.id)
             WikiQueryWorker.perform_async(keyword.id)
-            # YoutubeQueryWorker.perform_async(keyword.id)
+            YoutubeQueryWorker.perform_async(keyword.id)
             RedditQueryWorker.perform_async(keyword.id)
           end
         end
