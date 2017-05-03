@@ -9,14 +9,10 @@ class YoutubeQueryWorker
 
     if user_keyword.present?
       client = get_service
-      begin
-        # Call the search.list method to retrieve results matching the specified
-        # query term.
+      begin        
         search_response = client.list_searches('snippet', {q: user_keyword.keyword, max_results: 10 })
         results = []
 
-        # Add each result to the appropriate list, and then display the lists of
-        # matching videos, channels, and playlists.
         len = search_response.items.length
         search_response.items.each_with_index do |search_result, index|
           case search_result.id.kind
