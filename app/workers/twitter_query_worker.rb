@@ -1,4 +1,3 @@
-require 'temboo'
 require 'Library/Twitter'
 
 class TwitterQueryWorker
