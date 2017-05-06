@@ -19,7 +19,7 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'puma'
+# gem 'puma'
 
 gem 'pg'
 
@@ -48,6 +48,8 @@ gem 'awesome_print'
 gem 'alchemy-api-rb', :require => 'alchemy_api'
 
 # gem 'temboo', '<= 2.19.0'
+
+gem "passenger"
 
 gem 'google-search'
 
