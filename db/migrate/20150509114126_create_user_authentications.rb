@@ -6,7 +6,7 @@ class CreateUserAuthentications < ActiveRecord::Migration
       t.string   "uid"
       t.string   "token"
       t.datetime "token_expires_at"
-      t.text     "params"
+      t.jsonb     "params"
       t.datetime "created_at",                 :null => false
       t.datetime "updated_at",                 :null => false
     end
@@ -14,4 +14,3 @@ class CreateUserAuthentications < ActiveRecord::Migration
     add_index "user_authentications", ["user_id"], :name => "index_user_authentications_on_user_id"
   end
 end
-
