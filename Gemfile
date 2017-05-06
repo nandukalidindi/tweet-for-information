@@ -47,7 +47,7 @@ gem 'awesome_print'
 
 gem 'alchemy-api-rb', :require => 'alchemy_api'
 
-gem 'temboo', '<= 2.19.0'
+# gem 'temboo', '<= 2.19.0'
 
 gem 'google-search'
 

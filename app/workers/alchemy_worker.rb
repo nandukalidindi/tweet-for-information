@@ -13,7 +13,7 @@ class AlchemyWorker
           unless ['RT'].include?(result['text'])
             keyword = snippet.user_keywords.create(analysis_type: analysis_type.to_sym, keyword: result['text'], relevance: result['relevance'])
 
-            TwitterQueryWorker.perform_async(keyword.id)
+            # TwitterQueryWorker.perform_async(keyword.id)
             GoogleNewsQueryWorker.perform_async(keyword.id)
             WikiQueryWorker.perform_async(keyword.id)
             YoutubeQueryWorker.perform_async(keyword.id)
