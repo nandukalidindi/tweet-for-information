@@ -1,5 +1,4 @@
 require "httparty"
-require "pry"
 require "kafka"
 require "aws-sdk"
 require "json"
