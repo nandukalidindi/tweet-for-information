@@ -12,12 +12,22 @@ class AlchemyWorker
         results.each do |result|
           unless ['RT'].include?(result['text'])
             keyword = snippet.user_keywords.create(analysis_type: analysis_type.to_sym, keyword: result['text'], relevance: result['relevance'])
+            user_keyword = UserKeyword.find(keyword.id)
 
-            # TwitterQueryWorker.perform_async(keyword.id)
-            GoogleNewsQueryWorker.perform_async(keyword.id)
-            WikiQueryWorker.perform_async(keyword.id)
-            YoutubeQueryWorker.perform_async(keyword.id)
-            RedditQueryWorker.perform_async(keyword.id)
+            if user_keyword.present?
+              kafka = Kafka.new(
+                seed_brokers: ["localhost:9092"],
+                client_id: "my-application"
+              )
+
+              kafka.deliver_message(JSON.generate(user_keyword.attributes), topic: "keywords")
+            end
+
+
+            # GoogleNewsQueryWorker.perform_async(keyword.id)
+            # WikiQueryWorker.perform_async(keyword.id)
+            # YoutubeQueryWorker.perform_async(keyword.id)
+            # RedditQueryWorker.perform_async(keyword.id)
           end
         end
       end

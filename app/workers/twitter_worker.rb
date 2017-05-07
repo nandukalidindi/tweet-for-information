@@ -25,9 +25,6 @@ class TwitterWorker
             snippet = user_authentication.snippets.create(title: tweet_title)
 
             if snippet.present?
-              #AlchemyWorker.perform_async(snippet.id, "relation_extraction")
-              #AlchemyWorker.perform_async(snippet.id, "concept_tagging")
-              #AlchemyWorker.perform_async(snippet.id, "entity_extraction")
               AlchemyWorker.perform_async(snippet.id, "keyword_extraction")
             end
           end

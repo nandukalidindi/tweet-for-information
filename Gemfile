@@ -23,6 +23,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'pg'
 
+gem 'ruby-kafka'
+
 gem 'bootstrap-sass', '~> 3.3.4.1'
 
 gem 'devise', '~> 3.4.1'

@@ -1,0 +1,2 @@
+class WorkerProcessorController < ApplicationController
+end
