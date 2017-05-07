@@ -12,6 +12,7 @@ c = Aws::SNS::Client.new(region: 'us-west-2')
 
 kafka.each_message(topic: "keywords") do |message|
   begin
+    user_keyword = JSON.parse(message.value)
     results = HTTParty.get("http://www.reddit.com/search.json?q=#{CGI::escape(user_keyword['keyword'])}")
 
     len = results.parsed_response['data']['children'].length
