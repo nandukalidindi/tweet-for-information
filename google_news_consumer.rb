@@ -1,4 +1,4 @@
-require "HTTParty"
+require "httparty"
 require "pry"
 require "kafka"
 # require "aws-sdk"

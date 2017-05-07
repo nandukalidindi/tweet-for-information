@@ -1,5 +1,4 @@
 require "httparty"
-require "pry"
 require "kafka"
 require "aws-sdk"
 require "json"
@@ -13,27 +12,39 @@ c = Aws::SNS::Client.new(region: 'us-west-2')
 
 kafka.each_message(topic: "keywords") do |message|
   begin
-    binding.pry
     user_keyword = JSON.parse(message.value)
-    results = HTTParty.get("http://en.wikipedia.org/w/api.php?action=opensearch&search=#{CGI::escape(user_keyword['keyword'])}")
-    len = results[1].length
+    uri = URI('https://api.cognitive.microsoft.com/bing/v5.0/news/')
+    uri.query = URI.encode_www_form({
+        'Category' => user_keyword
+    })
 
-    results[1].each_with_index do |word, index|
+    request = Net::HTTP::Get.new(uri.request_uri)
+    request['Ocp-Apim-Subscription-Key'] = 'ca025a83d82440748fad7f5b68856278'
+    request.body = "{body}"
+
+    response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
+        http.request(request)
+    end
+
+    response = JSON.parse(response.body)
+
+    len = response['value'].length
+
+    response['value'].each_with_index do |news, index|
       message_json = {
         user_keyword_id: user_keyword['id'],
-        provider: 'wiki',
-        uri: results[3][index],
-        content: results[2][index],
+        provider: 'bing',
+        uri: news['url'],
+        content: news['description'],
         score: ((len-index).to_f/len.to_f) * user_keyword['relevance']
       }
 
       resp = c.publish({
-        topic_arn: "<WIKI ARN>",
+        topic_arn: "<BING ARN>",
         message: JSON.generate(message_json),
-        subject: "Wiki",
+        subject: "Bing",
         message_structure: "raw"
       })
-
     end
   rescue Exception => e
     p "EXCEPTION encountered: #{e.message} - #{e.backtrace}"

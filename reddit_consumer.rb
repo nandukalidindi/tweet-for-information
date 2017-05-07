@@ -1,16 +1,15 @@
-require "HTTParty"
+require "httparty"
 require "pry"
 require "kafka"
-# require "aws-sdk"
-# require "alchemy_api"
+require "aws-sdk"
 require "json"
 
 kafka = Kafka.new(seed_brokers: ["localhost:9092"])
 
-# Aws.config.update({region: 'us-west-2',credentials:
-# Aws::Credentials.new('<aws_access_key_id>', '<aws_secret_access_key>')})
+Aws.config.update({region: 'us-west-2',credentials:
+Aws::Credentials.new('<aws_access_key_id>', '<aws_secret_access_key>')})
 
-# c = Aws::SNS::Client.new(region: 'us-west-2')
+c = Aws::SNS::Client.new(region: 'us-west-2')
 
 kafka.each_message(topic: "keywords") do |message|
   begin
