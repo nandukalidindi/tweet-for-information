@@ -13,13 +13,13 @@ Rails.application.routes.draw do
   get '/all_keywords' => 'home#all_keywords'
   get '/visuals' => 'home#visuals'
 
-  post '/ingestion/youtube' => 'worker_process#youtube'
+  post '/ingestion/youtube' => 'worker_processor#youtube'
 
-  post '/ingestion/reddit' => 'worker_process#reddit'
+  post '/ingestion/reddit' => 'worker_processor#reddit'
 
-  post '/ingestion/bing' => 'worker_process#bing'
-  
-  post '/ingestion/wiki' => 'worker_process#wiki'
+  post '/ingestion/bing' => 'worker_processor#bing'
+
+  post '/ingestion/wiki' => 'worker_processor#wiki'
 
 
   mount Sidekiq::Web => '/sidekiq'

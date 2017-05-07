@@ -16,7 +16,7 @@ kafka.each_message(topic: "keywords") do |message|
     client = get_service
     user_keyword = JSON.parse(message.value)
 
-    search_response = client.list_searches('snippet', {q: user_keyword.keyword, max_results: 10 })
+    search_response = client.list_searches('snippet', {q: user_keyword['keyword'], max_results: 10 })
     results = []
 
     len = search_response.items.length

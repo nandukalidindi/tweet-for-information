@@ -1,5 +1,7 @@
 class WorkerProcessorController < ApplicationController
 
+  skip_before_filter  :verify_authenticity_token
+
   def youtube
     Rails.logger.info(request.raw_post)
     youtube_message = JSON.parse(JSON.parse(request.raw_post)["Message"] || "{}")
@@ -26,6 +28,7 @@ class WorkerProcessorController < ApplicationController
 
   def insert_message(message)
     if message['user_keyword_id']
+      user_keyword = UserKeyword.find(message['user_keyword_id'])
       user_keyword.user_keyword_hits.create(
         provider: message['provider'],
         uri: message['uri'],
