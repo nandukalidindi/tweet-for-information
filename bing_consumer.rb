@@ -13,7 +13,7 @@ c = Aws::SNS::Client.new(region: 'us-west-2')
 kafka.each_message(topic: "keywords") do |message|
   begin
     user_keyword = JSON.parse(message.value)
-    uri = URI('https://api.cognitive.microsoft.com/bing/v5.0/news/')
+    uri = URI('https://api.cognitive.microsoft.com/bing/v5.0/news/search')
     uri.query = URI.encode_www_form({
       'q' => user_keyword['keyword'],
       'count' => '10',
