@@ -40,8 +40,8 @@ gem 'clockwork'
 gem 'sinatra', :require => nil
 gem 'sidekiq'
 
-gem 'sunspot_rails'
-gem 'sunspot_solr'
+# gem 'sunspot_rails'
+# gem 'sunspot_solr'
 
 gem 'awesome_print'
 
