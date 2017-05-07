@@ -3,17 +3,15 @@
 		<div class="panel panel-default">
 		  <!-- Default panel contents -->
 		  <div class="panel-heading text-center" style="font-size:20px">Here's WhatsNew!!</div>
-			<table class="table-striped table-hover table-condensed">
-				<tbody>
-					<% @keywords.each do |keyword| %>
-						<tr>
-							<td><span style="width: 39px;"><img src="/images/<%=keyword.provider%>.png"/></span></td>
-							<td><%= truncate(strip_tags(CGI.unescapeHTML(keyword.content || "")), length: 250) %></td>
-							<td><a style="font-size: medium;" target="_blank" href="<%=keyword.uri%>"><img src="/images/arrow.png"/></a></td>
-						</tr>
-					<% end %>
-				</tbody>
-			</table>
+			<div>
+				<% @keywords.each do |keyword| %>
+					<div style="display: flex; align-items: center; justify-content: space-between;">
+						<div><span style="width: 39px;"><img src="/public/images/<%=keyword.provider%>.png"/></span></div>
+						<div><%= truncate(strip_tags(CGI.unescapeHTML(keyword.content || "")), length: 250) %></div>
+						<div><a style="font-size: medium;" target="_blank" href="<%=keyword.uri%>"><img src="/public/images/arrow.png"/></a></div>
+					</div>
+				<% end %>
+			</div>
 		</div>
 	</div>
 	<div class="visuals">
@@ -25,6 +23,6 @@
 		</span>
 	</div>
 <% else %>
-	<img style="padding-left:500px;" src="/images/processing.gif"/>
+	<img style="padding-left:500px;" src="/public/images/processing.gif"/>
 	<span>Processing...</span>
 <% end %>
