@@ -36,13 +36,16 @@ class User < ActiveRecord::Base
     snippet_ids = UserSnippet.where("user_authentication_id in (?)", auth_ids).collect(&:id)
     keyword_ids = UserKeyword.where("user_snippet_id in (?)", snippet_ids).collect(&:id)
 
+    projected_unique_ids = UserKeywordHit.group(:content).select("MAX(id) AS id")
+    unique_content_user_keyword_hits = UserKeywordHit.where("id in (?)", projected_unique_ids.map(&:id))
+
     ["twitter", "google_news"].each do |provider|
-      keyword_hits_all = UserKeywordHit.where("user_keyword_id in (?) and provider=?", keyword_ids, provider).where.not("content is NULL or content = ''").order('created_at DESC').take(500)
+      keyword_hits_all = unique_content_user_keyword_hits.where("user_keyword_id in (?) and provider=?", keyword_ids, provider).where.not("content is NULL or content = ''").order('created_at DESC').take(500)
       keyword_hits.push UserKeywordHit.where("id in (?)", keyword_hits_all.collect(&:id)).order('score DESC').take(2)
     end
 
-    ["wiki", "reddit", "youtube"].each do |provider|
-      keyword_hits_all = UserKeywordHit.where("user_keyword_id in (?) and provider=?", keyword_ids, provider).where.not("content is NULL or content = ''").order('created_at DESC').take(100)
+    ["wiki", "reddit", "youtube", "bing"].each do |provider|
+      keyword_hits_all = unique_content_user_keyword_hits.where("user_keyword_id in (?) and provider=?", keyword_ids, provider).where.not("content is NULL or content = ''").order('created_at DESC').take(100)
       keyword_hits.push UserKeywordHit.where("id in (?)", keyword_hits_all.collect(&:id)).order('score DESC').take(2)
     end
 

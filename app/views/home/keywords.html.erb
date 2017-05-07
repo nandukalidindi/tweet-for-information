@@ -6,7 +6,7 @@
 			<div>
 				<% @keywords.each do |keyword| %>
 					<div style="display: flex; align-items: center; justify-content: space-between;">
-						<div><span style="width: 39px;"><img src="/public/images/<%=keyword.provider%>.png"/></span></div>
+						<div><img src="/public/images/<%=keyword.provider%>.png" style="width: 50px"/></div>
 						<div><%= truncate(strip_tags(CGI.unescapeHTML(keyword.content || "")), length: 250) %></div>
 						<div><a style="font-size: medium;" target="_blank" href="<%=keyword.uri%>"><img src="/public/images/arrow.png"/></a></div>
 					</div>

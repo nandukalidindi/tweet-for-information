@@ -15,7 +15,11 @@ kafka.each_message(topic: "keywords") do |message|
     user_keyword = JSON.parse(message.value)
     uri = URI('https://api.cognitive.microsoft.com/bing/v5.0/news/')
     uri.query = URI.encode_www_form({
-        'Category' => user_keyword
+      'q' => user_keyword['keyword'],
+      'count' => '10',
+      'offset' => '0',
+      'mkt' => 'en-us',
+      'safeSearch' => 'Moderate'
     })
 
     request = Net::HTTP::Get.new(uri.request_uri)
