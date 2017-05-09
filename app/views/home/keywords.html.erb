@@ -7,7 +7,12 @@
 				<% @keywords.each do |keyword| %>
 					<div style="display: flex; align-items: center; justify-content: space-between;">
 						<div><img src="/public/images/<%=keyword.provider%>.png" style="width: 50px"/></div>
-						<div><%= truncate(strip_tags(CGI.unescapeHTML(keyword.content || "")), length: 250) %></div>
+						<div>
+							<% if keyword.content["http://giphy.com/embed"].nil? %>
+								<%= truncate(strip_tags(CGI.unescapeHTML(keyword.content || "")), length: 250) %>
+							<% else %> <embed src=<%= keyword.content %>>
+							<% end %>
+						</div>
 						<div><a style="font-size: medium;" target="_blank" href="<%=keyword.uri%>"><img src="/public/images/arrow.png"/></a></div>
 					</div>
 				<% end %>
