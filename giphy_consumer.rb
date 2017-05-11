@@ -12,7 +12,9 @@ c = Aws::SNS::Client.new(region: 'us-west-2')
 
 kafka.each_message(topic: "keywords") do |message|
   begin
+    p "====================================================="
     user_keyword = JSON.parse(message.value)
+    p "MESSAGE IS #{user_keyword}"
     results = HTTParty.get("http://api.giphy.com/v1/gifs/search?q=#{CGI::escape(user_keyword['keyword'])}&api_key=dc6zaTOxFJmzC")
 
     len = results.parsed_response['data'].length
@@ -25,7 +27,7 @@ kafka.each_message(topic: "keywords") do |message|
         content: result['embed_url'],
         score: (((len-index).to_f/len.to_f) * user_keyword['relevance'] * 0.85)
       }
-
+      p "SENDING MESSAGE TO SNS => #{message_json}"
       resp = c.publish({
         topic_arn: "<GIPHY ARN>",
         message: JSON.generate(message_json),

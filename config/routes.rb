@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   post '/ingestion/wiki' => 'worker_processor#wiki'
 
+  post '/ingestion/giphy' => 'worker_processor#giphy'
+
 
   mount Sidekiq::Web => '/sidekiq'
 end

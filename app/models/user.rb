@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
       keyword_hits.push UserKeywordHit.where("id in (?)", keyword_hits_all.collect(&:id)).order('score DESC').take(2)
     end
 
-    ["wiki", "reddit", "youtube", "bing"].each do |provider|
+    ["wiki", "reddit", "youtube", "bing", "giphy"].each do |provider|
       keyword_hits_all = unique_content_user_keyword_hits.where("user_keyword_id in (?) and provider=?", keyword_ids, provider).where.not("content is NULL or content = ''").order('created_at DESC').take(100)
       keyword_hits.push UserKeywordHit.where("id in (?)", keyword_hits_all.collect(&:id)).order('score DESC').take(2)
     end

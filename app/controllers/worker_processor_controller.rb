@@ -26,6 +26,12 @@ class WorkerProcessorController < ApplicationController
     insert_message(reddit_message)
   end
 
+  def giphy
+    Rails.logger.info(request.raw_post)
+    giphy_message = JSON.parse(JSON.parse(request.raw_post)["Message"] || "{}")
+    insert_message(giphy_message)
+  end
+
   def insert_message(message)
     if message['user_keyword_id']
       user_keyword = UserKeyword.find(message['user_keyword_id'])
