@@ -12,7 +12,9 @@ c = Aws::SNS::Client.new(region: 'us-west-2')
 
 kafka.each_message(topic: "keywords") do |message|
   begin
+    p "====================================================="
     user_keyword = JSON.parse(message.value)
+    p "MESSAGE IS #{user_keyword}"
     results = HTTParty.get("http://www.reddit.com/search.json?q=#{CGI::escape(user_keyword['keyword'])}")
 
     len = results.parsed_response['data']['children'].length
@@ -25,7 +27,7 @@ kafka.each_message(topic: "keywords") do |message|
         content: result['data']['selftext_html'],
         score: (((len-index).to_f/len.to_f) * user_keyword['relevance'] * 0.85)
       }
-
+      p "SENDING MESSAGE TO SNS => #{message_json}"
       resp = c.publish({
         topic_arn: "<REDDIT ARN>",
         message: JSON.generate(message_json),

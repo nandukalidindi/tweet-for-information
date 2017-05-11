@@ -6,30 +6,35 @@ class WorkerProcessorController < ApplicationController
     Rails.logger.info(request.raw_post)
     youtube_message = JSON.parse(JSON.parse(request.raw_post)["Message"] || "{}")
     insert_message(youtube_message)
+    render status: 200, json: {}
   end
 
   def bing
     Rails.logger.info(request.raw_post)
     bing_message = JSON.parse(JSON.parse(request.raw_post)["Message"] || "{}")
     insert_message(bing_message)
+    render status: 200, json: {}
   end
 
   def wiki
     Rails.logger.info(request.raw_post)
     wiki_message = JSON.parse(JSON.parse(request.raw_post)["Message"] || "{}")
     insert_message(wiki_message)
+    render status: 200, json: {}
   end
 
   def reddit
     Rails.logger.info(request.raw_post)
     reddit_message = JSON.parse(JSON.parse(request.raw_post)["Message"] || "{}")
     insert_message(reddit_message)
+    render status: 200, json: {}
   end
 
   def giphy
     Rails.logger.info(request.raw_post)
     giphy_message = JSON.parse(JSON.parse(request.raw_post)["Message"] || "{}")
     insert_message(giphy_message)
+    render status: 200, json: {}
   end
 
   def insert_message(message)

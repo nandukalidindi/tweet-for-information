@@ -12,8 +12,9 @@ c = Aws::SNS::Client.new(region: 'us-west-2')
 
 kafka.each_message(topic: "keywords") do |message|
   begin
-    binding.pry
+    p "====================================================="
     user_keyword = JSON.parse(message.value)
+    p "MESSAGE IS #{user_keyword}"
     results = HTTParty.get("http://en.wikipedia.org/w/api.php?action=opensearch&search=#{CGI::escape(user_keyword['keyword'])}")
     len = results[1].length
 
@@ -25,7 +26,7 @@ kafka.each_message(topic: "keywords") do |message|
         content: results[2][index],
         score: ((len-index).to_f/len.to_f) * user_keyword['relevance']
       }
-
+      p "SENDING MESSAGE TO SNS => #{message_json}"
       resp = c.publish({
         topic_arn: "<WIKI ARN>",
         message: JSON.generate(message_json),

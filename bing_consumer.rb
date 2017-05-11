@@ -12,7 +12,9 @@ c = Aws::SNS::Client.new(region: 'us-west-2')
 
 kafka.each_message(topic: "keywords") do |message|
   begin
+    p "====================================================="
     user_keyword = JSON.parse(message.value)
+    p "MESSAGE IS #{user_keyword}"
     uri = URI('https://api.cognitive.microsoft.com/bing/v5.0/news/search')
     uri.query = URI.encode_www_form({
       'q' => user_keyword['keyword'],
@@ -42,7 +44,7 @@ kafka.each_message(topic: "keywords") do |message|
         content: news['description'],
         score: ((len-index).to_f/len.to_f) * user_keyword['relevance']
       }
-
+      p "SENDING MESSAGE TO SNS => #{message_json}"
       resp = c.publish({
         topic_arn: "<BING ARN>",
         message: JSON.generate(message_json),
