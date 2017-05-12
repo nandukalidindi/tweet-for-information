@@ -22,7 +22,7 @@ kafka.each_message(topic: "keywords") do |message|
     results = []
 
     len = search_response.items.length
-    search_response.items.each_with_index do |search_result, index|
+    search_response.items.first(3).each_with_index do |search_result, index|
       case search_result.id.kind
       when 'youtube#video'
         message_json = {

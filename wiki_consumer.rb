@@ -18,7 +18,7 @@ kafka.each_message(topic: "keywords") do |message|
     results = HTTParty.get("http://en.wikipedia.org/w/api.php?action=opensearch&search=#{CGI::escape(user_keyword['keyword'])}")
     len = results[1].length
 
-    results[1].each_with_index do |word, index|
+    results[1].first(3).each_with_index do |word, index|
       message_json = {
         user_keyword_id: user_keyword['id'],
         provider: 'wiki',

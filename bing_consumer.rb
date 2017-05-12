@@ -36,7 +36,7 @@ kafka.each_message(topic: "keywords") do |message|
 
     len = response['value'].length
 
-    response['value'].each_with_index do |news, index|
+    response['value'].first(3).each_with_index do |news, index|
       message_json = {
         user_keyword_id: user_keyword['id'],
         provider: 'bing',

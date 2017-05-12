@@ -19,7 +19,7 @@ kafka.each_message(topic: "keywords") do |message|
 
     len = results.parsed_response['data']['children'].length
 
-    results.parsed_response['data']['children'].each_with_index do |result, index|
+    results.parsed_response['data']['children'].first(3).each_with_index do |result, index|
       message_json = {
         user_keyword_id: user_keyword['id'],
         provider: 'reddit',
