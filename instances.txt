@@ -7,3 +7,24 @@ Wiki - i-0b571291226003a8c <===> BROKER ID = 3
 Giphy - <===> BROKER ID = 5
 
 ZOOKEEPER - i-0a41787c9721d9079
+
+YOUTUBE
+ssh -i ~/.ssh/nandu123.pem ec2-user@ec2-107-23-220-152.compute-1.amazonaws.com
+
+BING
+ssh -i ~/.ssh/nandu123.pem ec2-user@ec2-34-204-67-210.compute-1.amazonaws.com
+
+REDDIT
+ssh -i ~/.ssh/nandu123.pem ec2-user@ec2-54-221-135-109.compute-1.amazonaws.com
+
+WIKI
+ssh -i ~/.ssh/nandu123.pem ec2-user@ec2-34-205-72-141.compute-1.amazonaws.com
+
+GIPHY
+ssh -i ~/.ssh/nandu123.pem ec2-user@ec2-54-161-22-251.compute-1.amazonaws.com
+
+EBS
+ssh -i ~/.ssh/nandu123.pem ec2-user@ec2-54-158-8-234.compute-1.amazonaws.com
+
+ZOOKEEPER
+ssh -i ~/.ssh/nandu123.pem ec2-user@ec2-34-224-7-38.compute-1.amazonaws.com
